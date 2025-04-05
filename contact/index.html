@@ -7,8 +7,28 @@
 </head>
 <body>
     <nav>
-        <a href= "file:///Users/ishitatakkar/Documents/GitHub/portfolio/contact/index.html"></a>
+        <a href="index.html">Home</a> <br>
+        <a href="projects/index.html">Projects</a> <br>
+        <a href="contact/index.html">Contact</a> <br>
         <a href = "https://github.com/ishita-takkar" target="_blank">GitHub</a>
     <h1>Contact Info</h1>
+    <form action = "mailto: itakkar@ucsd.edu"method="POST" enctype="text/plain"> 
+        <label> 
+            Sender's Email Address:
+            <input name="email" type = "email">
+        </label>
+        <label>
+            Suject:
+            <input name="subject">
+        </label>
+        <label>
+            Message:
+            <textarea name="body">
+            </textarea>
+        </label>
+        
+        <button>Submit</button>
+
+    </form>
 </body>
 </html>

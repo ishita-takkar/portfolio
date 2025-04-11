@@ -207,3 +207,38 @@ body.resume ul li {
   margin-bottom: 0.4em;
   font-weight: 500;
 }
+
+.resume-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.3em;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 2px;
+  color: oklch(30% 0.1 250);
+}
+
+.resume-header p {
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 1.25em;
+}
+
+.resume-header p a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  font-weight: 500;
+}
+
+.resume-header p a:hover {
+  background-color: oklch(from var(--color-accent) 95% 5% h);
+  padding: 0 0.3em;
+  border-radius: 0.3em;
+}
+
+.resume-header.separator {
+  opacity: 0.6;
+}

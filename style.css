@@ -152,3 +152,79 @@ h1 {
   font-size: 1em;
   line-height: 1.2;
 }
+
+body.resume {
+  padding-block: 2em;
+}
+
+.resume h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5em;
+}
+
+.resume p {
+  font-size: 1rem;
+  margin-bottom: 1em;
+}
+
+.resume a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.resume {
+  max-width: 100ch;
+  margin-inline: auto;
+  padding-inline: 1em;
+}
+
+.resume section {
+  margin-bottom: 2.5em;
+  padding-bottom: 1.5em;
+  border-bottom: 1px solid oklch(90% 0.02 250);
+}
+
+.resume section:last-of-type {
+  border-bottom: none;
+  background: oklch(from var(--color-accent) 97% 0.03 h);
+  padding: 1em;
+  border-radius: 0.5em;
+}
+
+.resume section > header h2 {
+  font-size: 1.75em;
+  color: var(--color-accent);
+  margin-bottom: 0.75em;
+}
+
+.resume article {
+  margin-bottom: 1.5em;
+}
+
+.resume article h3 {
+  font-size: 1.25em;
+  color: oklch(40% 0.1 250);
+  margin-bottom: 0.3em;
+}
+
+.resume article p {
+  margin: 0.25em 0;
+  font-weight: 500;
+}
+
+.resume time {
+  display: inline-block;
+  font-size: 0.9em;
+  color: oklch(50% 0.1 250);
+  margin-bottom: 0.5em;
+}
+
+.resume ul {
+  list-style-type: "✦ ";
+  padding-left: 1em;
+}
+
+.resume ul li {
+  margin-bottom: 0.4em;
+  font-weight: 500;
+}

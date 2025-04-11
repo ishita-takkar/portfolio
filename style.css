@@ -67,7 +67,6 @@ textarea {
 
 button {
   grid-column: 1 / -1;
-  justify-self: start;
   padding: 0.5em 1em;
 }
 

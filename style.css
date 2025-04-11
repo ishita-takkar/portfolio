@@ -152,9 +152,3 @@ h1 {
   font-size: 1em;
   line-height: 1.2;
 }
-
-.align {
-  max-width: 100ch;
-  margin-inline: auto;
-  padding-inline: 1em;
-}

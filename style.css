@@ -103,7 +103,7 @@ button {
 
 h1 {
   font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   text-align: left;
 }
 
@@ -122,4 +122,10 @@ h1 {
 .projects p {
   font-size: 1em;
   line-height: 1.2;
+}
+ 
+.align {
+  max-width: 100ch;
+  margin-inline: auto;
+  padding-inline: 1em;
 }

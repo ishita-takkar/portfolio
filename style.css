@@ -52,17 +52,23 @@ nav a:hover {
 }
 
 label {
-  display: block;
-  margin-block: 0.7em;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
 }
 
 input,
-textarea,
-button {
+textarea {
+  grid-column: 2;
   width: 100%;
   box-sizing: border-box;
   padding: 0.5em;
-  margin-top: 0.2em;
+}
+
+button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 0.5em 1em;
 }
 
 form{

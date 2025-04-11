@@ -86,7 +86,7 @@ button {
   padding-block: 2em;
 }
 
-article{
+.projects article {
   display: grid;
   grid-template-rows: auto 210px 1fr;
   grid-row: span 3;
@@ -101,9 +101,13 @@ article{
   transform: translateY(-5px);
 }
 
-h1, h2{
-  font-size: 1.3em;
-  text-wrap: balance;
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.projects h2 {
+  font-size: 1.25rem;
   margin: 0;
 }
 
@@ -111,8 +115,7 @@ h1, h2{
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 1em;
+  border-radius: 6px;
 }
 
 .projects p {

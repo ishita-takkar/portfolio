@@ -16,10 +16,12 @@ body {
     /* Set line height to 1.5 times the font size
          and use the OS’s UI font as the website font
        */
-  font: 100%/1.5 system-ui;
-  max-width: 150em;
-  margin: 1 auto; 
-  padding: 2rem;
+    
+    font: 100%/1.5 system-ui;
+    max-width: 100ch;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    
 }
 nav {
   display: flex; 

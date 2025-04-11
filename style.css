@@ -21,7 +21,6 @@ nav a{
   padding: 0.5em;
   text-decoration: none;
   color: inherit;
-  background-color: rgb(255, 64, 131);
 }
 
 nav a.current{

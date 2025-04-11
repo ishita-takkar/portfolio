@@ -59,9 +59,13 @@ label {
 input,
 textarea,
 button {
-  display: block;
   width: 100%;
   box-sizing: border-box;
   padding: 0.5em;
   margin-top: 0.2em;
+}
+
+form{
+  display: grid;
+  grid-template-columns: auto 1fr;
 }

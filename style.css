@@ -88,7 +88,7 @@ button {
 
 article{
   display: grid;
-  grid-template-rows: subgrid;
+  grid-template-rows: auto 210px 1fr;
   grid-row: span 3;
   gap: 1em;
   background: oklch(97% 2% 200);
@@ -96,8 +96,26 @@ article{
   border-radius: 6px;
   transition: transform 0.1s ease-in-out;
 }
+
+.projects article:hover {
+  transform: translateY(-5px);
+}
+
 h1, h2{
-  line-height: 1.1;
+  font-size: 1.3em;
   text-wrap: balance;
   margin: 0;
+}
+
+.projects img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1em;
+}
+
+.projects p {
+  font-size: 1em;
+  line-height: 1.2;
 }

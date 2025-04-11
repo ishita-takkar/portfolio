@@ -28,4 +28,5 @@ nav a.current{
   border-bottom-color: oklch(80% 3% 200);
   padding-bottom: 0.1em;
   font-weight: bold;
+  border-bottom-style: solid;
 }

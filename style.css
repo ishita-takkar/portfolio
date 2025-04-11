@@ -1,4 +1,4 @@
-:root {
+html{
   --color-accent: oklch(70% 30% 200) ;
 }
 
@@ -37,4 +37,10 @@ nav a.current{
   padding-bottom: 0.1em;
   font-weight: bold;
   border-bottom-style: solid;
+}
+
+nav a:hover {
+  border-bottom: 0.4em solid var(--color-accent);
+  background-color: oklch(from var(--color-accent) 95% 5% h);
+  cursor: pointer;
 }

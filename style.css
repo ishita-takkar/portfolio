@@ -157,53 +157,53 @@ body.resume {
   padding-block: 2em;
 }
 
-section {
+body.resume section {
   margin-bottom: 2.5em;
   padding-bottom: 1.5em;
   border-bottom: 1px solid oklch(90% 0.02 250);
 }
 
-section:last-of-type {
+body.resume section:last-of-type {
   border-bottom: none;
   background: oklch(from var(--color-accent) 97% 0.03 h);
   padding: 1em;
   border-radius: 0.5em;
 }
 
-section > header h2 {
+body.resume section > header h2 {
   font-size: 1.75em;
   color: var(--color-accent);
   margin-bottom: 0.5em;
 }
 
-article {
+body.resume article {
   margin-bottom: 1.5em;
 }
 
-article h3 {
+body.resume article h3 {
   font-size: 1.25em;
   margin-bottom: 0.3em;
   color: oklch(40% 0.1 250);
 }
 
-article p {
+body.resume article p {
   margin: 0.2em 0 0.3em 0;
   font-weight: 500;
 }
 
-article time {
+body.resume article time {
   display: inline-block;
   font-size: 0.9em;
   color: oklch(50% 0.1 250);
   margin-top: 0.3em;
 }
 
-ul {
+body.resume ul {
   list-style-type: "✦ ";
   padding-left: 1em;
 }
 
-ul li {
+body.resume ul li {
   margin-bottom: 0.4em;
   font-weight: 500;
 }

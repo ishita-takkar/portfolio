@@ -157,6 +157,36 @@ body.resume {
   padding-block: 2em;
 }
 
+.resume nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid oklch(80% 3% 200);
+  gap: 1em;
+}
+
+.resume nav a {
+  flex: 1;
+  text-align: center;
+  padding: 0.5em;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 0.2em solid transparent;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.resume nav a.current {
+  border-bottom: 0.4em solid oklch(80% 3% 200);
+  font-weight: bold;
+  padding-bottom: 0.1em;
+}
+
+.resume nav a:hover {
+  border-bottom: 0.4em solid var(--color-accent);
+  background-color: oklch(from var(--color-accent) 95% 5% h);
+}
+
 .resume h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5em;

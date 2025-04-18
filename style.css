@@ -12,37 +12,27 @@ html {
   color: CanvasText;
 }
 
-input,
-textarea,
-button {
-  font: inherit;
-}
-
 body {
-    /* Set line height to 1.5 times the font size
-         and use the OS’s UI font as the website font
-       */
-      font: 100%/1.5 system-ui;
-      max-width: 100ch;
-      margin-inline: max(1em, (100% - 100ch) / 2);
-      padding-inline: 1em;
-      background: Canvas;     
-      color: CanvasText;  
+  font: 100%/1.5 system-ui;
+  max-width: 100ch;
+  margin-inline: max(1em, (100% - 100ch) / 2);
+  padding-inline: 1em;
+  background: Canvas;
+  color: CanvasText;
+  margin-top: 0;
 }
 
 nav {
-  display: flex; 
+  --border-color: oklch(50% 10% 200 / 40%);
+  display: flex;
   margin-bottom: 2rem;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: var(--border-color);
-  text-decoration: none;
+  border-bottom: 1px solid var(--border-color);
   justify-content: center;
   align-items: center;
-  --border-color: oklch(50% 10% 200 / 40%);
+  text-decoration: none;
 }
 
-nav a{
+nav a {
   flex: 1;
   text-align: center;
   padding: 0.5em;
@@ -52,12 +42,10 @@ nav a{
   transition: border-color 0.2s, background-color 0.2s;
 }
 
-nav a.current{
-  border-bottom-width: 0.4em;
-  border-bottom-color: oklch(50% 10% 200 / 40%);
+nav a.current {
+  border-bottom: 0.4em solid var(--border-color);
   padding-bottom: 0.1em;
   font-weight: bold;
-  border-bottom-style: solid;
 }
 
 nav a:hover {

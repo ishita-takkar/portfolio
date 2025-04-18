@@ -228,3 +228,16 @@ body.resume {
   margin-bottom: 0.4em;
   font-weight: 500;
 }
+
+body {
+  margin-top: 0;
+}
+
+body > nav:first-child {
+  margin-top: 0;
+}
+
+.resume {
+  padding-top: 0;
+  margin-top: 0;
+}

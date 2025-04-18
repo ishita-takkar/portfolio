@@ -7,7 +7,7 @@ html {
   scroll-behavior: smooth;
   font: inherit;
   font-size: 100%;
-  color-scheme: dark;
+  color-scheme: light dark;
   background-color: Canvas;
   color: CanvasText;
 }
@@ -35,10 +35,11 @@ nav {
   margin-bottom: 2rem;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  border-bottom-color: oklch(80% 3% 200);
+  border-bottom-color: var(--border-color);
   text-decoration: none;
   justify-content: center;
   align-items: center;
+  --border-color: oklch(50% 10% 200 / 40%);
 }
 
 nav a{
@@ -53,7 +54,7 @@ nav a{
 
 nav a.current{
   border-bottom-width: 0.4em;
-  border-bottom-color: oklch(80% 3% 200);
+  border-bottom-color: oklch(50% 10% 200 / 40%);
   padding-bottom: 0.1em;
   font-weight: bold;
   border-bottom-style: solid;
@@ -61,7 +62,7 @@ nav a.current{
 
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
-  background-color: oklch(from var(--color-accent) 95% 5% h);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
   cursor: pointer;
 }
 

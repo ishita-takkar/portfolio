@@ -7,6 +7,9 @@ html {
   scroll-behavior: smooth;
   font: inherit;
   font-size: 100%;
+  color-scheme: light dark;
+  background-color: Canvas;
+  color: CanvasText;
 }
 
 input,

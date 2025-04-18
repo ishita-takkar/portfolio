@@ -155,7 +155,7 @@ h1 {
 
 body.resume {
   padding-top: 0;
-  padding-bottom: 2em;
+  margin-top: 0;
 }
 
 .resume h1 {

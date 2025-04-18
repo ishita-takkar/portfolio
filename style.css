@@ -188,8 +188,8 @@ body.resume {
 } */
 
 .resume h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0.25em;
 }
 
 .resume p {

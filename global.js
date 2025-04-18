@@ -12,9 +12,13 @@ function $$(selector, context = document) {
 
 // currentLink?.classList.add("current");
 
+const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+  ? "/"                            
+  : "/portfolio/"; 
+                
 let pages = [
     { url: 'index.html', title: 'Home' },
-    { url: 'resume.html', title: 'Home' },
+    { url: 'resume.html', title: 'resume' },
     { url: 'projects/', title: 'projects' },
     { url: 'contact/', title: 'contact' }
   ];
@@ -25,7 +29,7 @@ document.body.prepend(nav);
 for (let p of pages) {
     let url = p.url;
     let title = p.title;
-    // next step: create link and add it to nav
+    url = !url.startsWith('http') ? BASE_PATH + url : url;
     nav.insertAdjacentHTML('beforeend', `<a href="${url}">${title}</a>`);
   }
 

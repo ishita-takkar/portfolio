@@ -18,9 +18,9 @@ const BASE_PATH = (location.hostname === "localhost" || location.hostname === "1
                 
 let pages = [
     { url: 'index.html', title: 'Home' },
-    { url: 'resume.html', title: 'resume' },
-    { url: 'projects/', title: 'projects' },
-    { url: 'contact/', title: 'contact' }
+    { url: 'resume.html', title: 'Resume' },
+    { url: 'projects/', title: 'Projects' },
+    { url: 'contact/', title: 'Contact' }
   ];
 
 let nav = document.createElement('nav');

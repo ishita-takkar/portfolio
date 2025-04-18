@@ -41,6 +41,7 @@ for (let p of pages) {
       );
 
     a.toggleAttribute("target", a.host !== location.host);
+    a.toggleAttribute("rel", a.host !== location.host);
     nav.append(a);
   }
   

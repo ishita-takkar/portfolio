@@ -167,11 +167,6 @@ body.resume {
   margin-bottom: 1em;
 }
 
-.resume a {
-  color: var(--color-accent);
-  text-decoration: underline;
-}
-
 .resume {
   max-width: 100ch;
   margin-inline: auto;
@@ -230,10 +225,6 @@ body.resume {
 }
 
 body {
-  margin-top: 0;
-}
-
-body > nav:first-child {
   margin-top: 0;
 }
 

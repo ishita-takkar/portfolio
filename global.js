@@ -80,5 +80,5 @@ form?.addEventListener("submit", function (event) {
   }
 
   const url = `${form.action}?${params.join("&")}`;
-  location.href = url
+  location.href = url;
 });

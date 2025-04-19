@@ -45,7 +45,7 @@ for (let p of pages) {
     nav.append(a);
   }
 
-  document.body.insertAdjacentHTML(
+document.body.insertAdjacentHTML(
     'afterbegin',
     `
     <label class="color-scheme">
@@ -57,27 +57,28 @@ for (let p of pages) {
       </select>
     </label>
     `
-  );
-
-  const select = document.querySelector('.color-scheme select');
-
-  function setColorScheme(value) {
-    document.documentElement.style.setProperty('color-scheme', value);
-    select.value = value;
-  }
-
-  select.addEventListener('input', function (event) {
-    console.log('color scheme changed to', event.target.value);
-    document.documentElement.style.setProperty('color-scheme', event.target.value);
-  });
-
-  if ("colorScheme" in localStorage) {
+);
+  
+const select = document.querySelector('.color-scheme select');
+  
+function setColorScheme(scheme) {
+    document.documentElement.style.setProperty('color-scheme', scheme);
+    select.value = scheme;
+}
+  
+if ("colorScheme" in localStorage) {
     setColorScheme(localStorage.colorScheme);
-  }
+}
+  
+select.addEventListener('input', function (event) {
+  const scheme = event.target.value;
+    setColorScheme(scheme);
+    localStorage.colorScheme = scheme;
+});
 
-  const form = document.querySelector("form");
+const form = document.querySelector("form");
 
-  form?.addEventListener("submit", function (event) {
+form?.addEventListener("submit", function (event) {
     event.preventDefault();
     const data = new FormData(form);
     const params = [];
@@ -88,7 +89,13 @@ for (let p of pages) {
   
     const url = `${form.action}?${params.join("&")}`;
     location.href = url;
-  });
+});
+
+function setColorScheme(scheme) {
+    document.documentElement.style.setProperty('color-scheme', scheme);
+    select.value = scheme;
+}
+  
   
   
 

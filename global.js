@@ -61,12 +61,35 @@ for (let p of pages) {
 
   const select = document.querySelector('.color-scheme select');
 
+  function setColorScheme(value) {
+    document.documentElement.style.setProperty('color-scheme', value);
+    select.value = value;
+  }
+
   select.addEventListener('input', function (event) {
     console.log('color scheme changed to', event.target.value);
     document.documentElement.style.setProperty('color-scheme', event.target.value);
   });
 
+  if ("colorScheme" in localStorage) {
+    setColorScheme(localStorage.colorScheme);
+  }
 
+  const form = document.querySelector("form");
+
+  form?.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const data = new FormData(form);
+    const params = [];
+  
+    for (let [name, value] of data) {
+      params.push(`${name}=${encodeURIComponent(value)}`);
+    }
+  
+    const url = `${form.action}?${params.join("&")}`;
+    location.href = url;
+  });
+  
   
 
 

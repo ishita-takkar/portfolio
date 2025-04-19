@@ -29,7 +29,7 @@ nav {
   border-bottom: 1px solid var(--border-color);
   justify-content: center;
   align-items: center;
-  text-decoration: none;
+  margin-top: 1rem;
 }
 
 nav a {

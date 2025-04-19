@@ -29,7 +29,7 @@ nav {
   border-bottom: 1px solid var(--border-color);
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 nav a {
@@ -232,8 +232,7 @@ body {
 }
 
 .resume {
-  padding-top: 0;
-  margin-top: 0;
+  margin-top: 2rem;
 }
 
 .color-scheme {

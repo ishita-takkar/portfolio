@@ -42,6 +42,10 @@ export async function fetchJSON(url) {
   }
 }
 
+export async function fetchGitHubData(username) {
+  return fetchJSON(`https://api.github.com/users/${username}`);
+}
+
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }

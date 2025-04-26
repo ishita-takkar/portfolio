@@ -7,4 +7,7 @@ const projectsContainer = document.querySelector('.projects');
 renderProjects(projects, projectsContainer, 'h2');
 
 const titleElement = document.querySelector('.projects-title');
-titleElement.textContent = `Ishita's Projects (${projects.length})`;
+if (titleElement) {
+    titleElement.textContent = `Ishita's Projects (${projects.length})`;
+  }
+  

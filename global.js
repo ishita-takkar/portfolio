@@ -82,3 +82,47 @@ form?.addEventListener("submit", function (event) {
   const url = `${form.action}?${params.join("&")}`;
   location.href = url;
 });
+
+export async function fetchJSON(url) {
+  try {
+    // Fetch the JSON file from the given URL
+    const response = await fetch(url);
+    console.log(response); 
+
+  if (!response.ok) {
+      throw new Error(`Failed to fetch projects: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+    
+  } catch (error) {
+    console.error('Error fetching or parsing JSON data:', error);
+  }
+}
+
+export function renderProjects(project, containerElement, headingLevel = 'h2') {
+  if (!containerElement) {
+    console.error('Container element not found.');
+    return;
+  }
+  
+  containerElement.innerHTML = '';
+
+  for (const p of project) {
+    // Create article element
+    const article = document.createElement('article');
+
+    article.innerHTML = `
+      <${headingLevel}>${p.title}</${headingLevel}>
+      <img src="${p.image}" alt="${p.title}">
+      <p>${p.description}</p>
+    `;
+
+    containerElement.appendChild(article);
+  }
+
+  if (project.length === 0) {
+    containerElement.innerHTML = '<p>No projects found.</p>';
+  }
+}
+

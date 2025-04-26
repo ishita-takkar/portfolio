@@ -2,19 +2,19 @@
     {
       "title": "Recipe Ratings Analysis",
       "year": "2024",
-      "image": "../images/recipe.jpg",
+      "image": "/portfolio/images/recipe.jpg",
       "description": "Analyzed how sugar content affects recipe ratings using hypothesis testing, linear regression, and data visualization techniques."
     },
     {
       "title": "Loan Default Prediction",
       "year": "2023",
-      "image": "../images/loan.png",
+      "image": "/portfolio/images/loan.png",
       "description": "Built predictive models using logistic regression and decision trees to assess loan default risk based on LendingClub data."
     },
     {
       "title": "Image Processing Toolkit",
       "year": "2022",
-      "image": "../images/processing.jpg",
+      "image": "/portfolio/images/processing.jpg",
       "description": "Developed a Python-based image filter suite and implemented a KNN classifier to identify digit patterns in processed images."
     },
     {
@@ -26,13 +26,13 @@
     {
       "title": "Climate Change Visualization",
       "year": "2022",
-      "image": "../images/climate.JPG",
+      "image": "/portfolio/images/climate.JPG",
       "description": "Visualized global greenhouse gas emissions data using D3.js and identified trends across countries from 1990 to 2020."
     },
     {
       "title": "Credit Fraud Prediction",
       "year": "2023",
-      "image": "../images/credit.JPG",
+      "image": "/portfolio/images/credit.JPG",
       "description": "Trained ensemble models to predict creditworthiness and compared model performance using precision-recall metrics."
     },
     {

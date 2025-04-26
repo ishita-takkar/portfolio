@@ -10,7 +10,7 @@ console.log("Found .projects container:", projectsContainer);
 
 renderProjects(latestProjects, projectsContainer, 'h2');
 
-const githubData = await fetchGithubData('ishita-takkar'); // change to your actual GitHub username
+const githubData = await fetchGithubData('ishita-takkar'); 
 
 const profileStats = document.querySelector('#profile-stats');
 

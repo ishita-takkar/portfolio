@@ -1,26 +1,26 @@
 console.log("index.js loaded");
 
-import { fetchJSON, renderProjects, fetchGithubData } from 'global.js';
+import { fetchJSON, renderProjects, fetchGithubData } from './global.js';
 
-const projects = await fetchJSON('../lib/projects.json');
+const projects = await fetchJSON('./lib/projects.json');  // ✅ correct relative path
 const latestProjects = projects.slice(0, 3);
 
 const projectsContainer = document.querySelector('.projects');
+console.log("Found .projects container:", projectsContainer);
 
 renderProjects(latestProjects, projectsContainer, 'h2');
 
-const githubData = await fetchGithubData('giorgianicolaou');
+const githubData = await fetchGithubData('ishita-takkar'); // change to your actual GitHub username
 
 const profileStats = document.querySelector('#profile-stats');
 
 if (profileStats) {
-    profileStats.innerHTML = `
-          <dl>
-            <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
-            <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
-            <dt>Followers:</dt><dd>${githubData.followers}</dd>
-            <dt>Following:</dt><dd>${githubData.following}</dd>
-          </dl>
-      `;
-  }
-
+  profileStats.innerHTML = `
+    <dl>
+      <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
+      <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
+      <dt>Followers:</dt><dd>${githubData.followers}</dd>
+      <dt>Following:</dt><dd>${githubData.following}</dd>
+    </dl>
+  `;
+}

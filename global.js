@@ -1,30 +1,31 @@
 console.log('IT’S ALIVE!');
 
-export function renderProjects(project, containerElement, headingLevel = 'h2') {
-  if (!containerElement) {
-    console.error('Container element not found.');
-    return;
-  }
-  
-  containerElement.innerHTML = '';
 
-  for (const p of project) {
-    // Create article element
+export function renderProjects(projects, container, headingLevel = 'h2') {
+  container.innerHTML = '';
+
+  for (let project of projects) {
     const article = document.createElement('article');
 
-    article.innerHTML = `
-      <${headingLevel}>${p.title}</${headingLevel}>
-      <img src="${p.image}" alt="${p.title}">
-      <p>${p.description}</p>
-    `;
+    const heading = document.createElement(headingLevel);
+    heading.textContent = project.title;
 
-    containerElement.appendChild(article);
+    const img = document.createElement('img');
+    img.src = project.image;
+    img.alt = project.title;
+
+    const description = document.createElement('p');
+    description.textContent = project.description;
+
+    article.append(heading, img, description);
+    container.append(article);
   }
 
-  if (project.length === 0) {
-    containerElement.innerHTML = '<p>No projects found.</p>';
+  if (projects.length === 0) {
+    container.innerHTML = '<p>No projects found.</p>';
   }
 }
+
 export async function fetchJSON(url) {
   try {
     // Fetch the JSON file from the given URL

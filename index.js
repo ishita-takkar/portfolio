@@ -1,16 +1,15 @@
-console.log("index.js loaded");
-
-import { fetchJSON, renderProjects, fetchGithubData } from './global.js';
-
-const projects = await fetchJSON('./lib/projects.json');  
-const latestProjects = projects.slice(0, 3);
+import { fetchJSON, renderProjects, fetchGitHubData } from './global.js';
 
 const projectsContainer = document.querySelector('.projects');
-console.log("Found .projects container:", projectsContainer);
 
-renderProjects(latestProjects, projectsContainer, 'h2');
+if (projectsContainer) {
+  fetchJSON('./lib/projects.json').then(projects => {
+    const latestProjects = projects.slice(0, 3);
+    renderProjects(latestProjects, projectsContainer, 'h2');
+  });
+}
 
-const githubData = await fetchGithubData('ishita-takkar'); 
+const githubData = await fetchGitHubData('ishita-takkar');
 
 const profileStats = document.querySelector('#profile-stats');
 

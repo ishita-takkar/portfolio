@@ -12,7 +12,6 @@ let dataForPie = [];
 
 renderProjects(projects, projectsContainer, 'h2');
 updateTitle(projects.length);
-
 renderPieChart(projects);
 
 function updateTitle(count, year = '') {
@@ -65,7 +64,7 @@ function renderPieChart(projectsGiven) {
         selectedIndex = selectedIndex === i ? -1 : i;
         const filtered = filterProjects(projects);
         renderProjects(filtered, projectsContainer, 'h2');
-        renderPieChart(projects);
+        renderPieChart(projects); 
         updateTitle(filtered.length, selectedIndex !== -1 ? dataForPie[selectedIndex].label : '');
       });
   });
@@ -81,7 +80,7 @@ function renderPieChart(projectsGiven) {
       selectedIndex = selectedIndex === i ? -1 : i;
       const filtered = filterProjects(projects);
       renderProjects(filtered, projectsContainer, 'h2');
-      renderPieChart(projects);
+      renderPieChart(projects); 
       updateTitle(filtered.length, selectedIndex !== -1 ? dataForPie[selectedIndex].label : '');
     });
 }
@@ -90,6 +89,6 @@ searchInput.addEventListener('input', (event) => {
   query = event.target.value.toLowerCase();
   const filtered = filterProjects(projects);
   renderProjects(filtered, projectsContainer, 'h2');
-  renderPieChart(projects);
   updateTitle(filtered.length, selectedIndex !== -1 ? dataForPie[selectedIndex].label : '');
+  
 });

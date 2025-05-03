@@ -1,41 +1,45 @@
 import { fetchJSON, renderProjects } from '../global.js';
-
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
-let data = [1, 2, 3, 4, 5, 5];
-let colors = d3.scaleOrdinal(d3.schemeTableau10);
-
-let total = 0;
-for (let d of data) {
-  total += d;
-}
-
-let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-
-let arcData = [];
-let angle = 0;
-for (let d of data) {
-  let endAngle = angle + (d / total) * 2 * Math.PI;
-  arcData.push({ startAngle: angle, endAngle });
-  angle = endAngle;
-}
-
-let arcs = arcData.map((d) => arcGenerator(d));
-
-arcs.forEach((arc, idx) => {
-  d3.select('svg')
-    .append('path')
-    .attr('d', arc)
-    .attr('fill', colors(idx));
-});
- 
 const projects = await fetchJSON('../lib/projects.json');
 
 const projectsContainer = document.querySelector('.projects');
-
 renderProjects(projects, projectsContainer, 'h2');
+
 
 const titleElement = document.querySelector('.projects-title');
 if (titleElement) {
-    titleElement.textContent = `${projects.length} Projects `;
-  }
+  titleElement.textContent = `${projects.length} Projects`;
+}
+
+let rolledData = d3.rollups(
+  projects,
+  v => v.length,      
+  d => d.year          
+);
+
+let data = rolledData.map(([year, count]) => {
+  return { value: count, label: year };
+});
+
+
+let colors = d3.scaleOrdinal(d3.schemeTableau10);
+let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+let sliceGenerator = d3.pie().value(d => d.value);
+let arcData = sliceGenerator(data);
+let arcs = arcData.map(d => arcGenerator(d));
+
+d3.select('#projects-plot')
+  .selectAll('path')
+  .data(arcs)
+  .join('path')
+  .attr('d', d => d)
+  .attr('fill', (_, i) => colors(i));
+
+let legend = d3.select('.legend');
+legend.selectAll('li')
+  .data(data)
+  .join('li')
+  .attr('class', 'legend-item')
+  .attr('style', (_, i) => `--color:${colors(i)}`)
+  .html(d => `<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);

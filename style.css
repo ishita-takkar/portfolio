@@ -265,3 +265,16 @@ body {
   margin: 0;
   grid-row: 2;
 }
+
+.project-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-year {
+  font-family: Baskerville, serif;
+  font-size: 0.85rem;
+  color: gray;
+  font-variant-numeric: oldstyle-nums;
+  margin-top: 0.3rem;
+}

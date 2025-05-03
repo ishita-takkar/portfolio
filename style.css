@@ -293,8 +293,7 @@ body {
   margin-top: 1rem;
   padding: 1rem;
   border: 1px solid #ccc;
-  list-style: none;
-  justify-content: center; 
+  list-style: none; 
 }
 
 .legend-item {

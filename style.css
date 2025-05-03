@@ -318,5 +318,27 @@ body {
   margin-top: 1rem;
 }
 
+path {
+  cursor: pointer;
+  transition: 300ms;
+}
+
+svg:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
+}
+
+.selected {
+  --color: oklch(60% 45% 0) !important;
+}
+
+.selected:is(path) {
+  fill: var(--color);
+}
+
+.selected.legend-item {
+  outline: 2px dashed var(--color);
+}
+
+
 
 

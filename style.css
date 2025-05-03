@@ -278,3 +278,10 @@ body {
   font-variant-numeric: oldstyle-nums;
   margin-top: 0.3rem;
 }
+
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+
+  overflow: visible;
+}

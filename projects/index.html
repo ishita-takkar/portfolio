@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../style.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ishita_Takkar: Personal site and portfolio</title>
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <h1 class="projects-title">Ishita's Projects</h1>
+
+  <h1 class="projects-title">Loading Projects...</h1>
 
   <div class="container">
-    <svg id="projects-plot" viewBox="-50 -50 100 100"></svg>
+    <svg id="projects-pie-plot" viewBox="-50 -50 100 100"></svg>
     <ul class="legend"></ul>
   </div>
 
@@ -21,9 +22,12 @@
     placeholder="🔍 Search projects…"
   />
 
-  <div class="projects"></div>
+  <div class="projects">
+    <!-- Projects will be dynamically inserted here -->
+  </div>
 
   <script src="../global.js" type="module"></script>
   <script src="projects.js" type="module"></script>
+
 </body>
 </html>

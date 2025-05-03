@@ -1,31 +1,35 @@
 console.log("IT’S ALIVE!");
 
 export function renderProjects(projects, container, headingLevel = 'h2') {
+  if (!container) {
+    console.warn("renderProjects called without a valid container");
+    return;
+  }
+
+  const validHeadings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+  if (!validHeadings.includes(headingLevel)) {
+    headingLevel = 'h2';
+  }
+
   container.innerHTML = '';
 
   for (let project of projects) {
     const article = document.createElement('article');
 
-    const heading = document.createElement(headingLevel);
-    heading.textContent = project.title;
+    const title = project.title || 'Untitled Project';
+    const image = project.image || 'default-image.png';
+    const descriptionText = project.description || 'No description available.';
 
-    const img = document.createElement('img');
-    img.src = project.image;
-    img.alt = project.title;
+    article.innerHTML = `
+      <${headingLevel}>${title}</${headingLevel}>
+      <img src="${image}" alt="${title}">
+      <div class="project-text">
+        <p>${descriptionText}</p>
+        <p class="project-year">${project.year}</p>
+      </div>
+    `;
 
-    const description = document.createElement('p');
-    description.textContent = project.description;
-
-    const year = document.createElement('p');
-    year.textContent = `Year: ${project.year}`;
-    year.classList.add('project-year');
-
-    const textContainer = document.createElement('div');
-    textContainer.classList.add('project-text');
-    textContainer.append(description, year);
-
-    article.append(heading, img, textContainer);
-    container.append(article);
+    container.appendChild(article);
   }
 
   if (projects.length === 0) {
@@ -52,7 +56,6 @@ export async function fetchJSON(url) {
 export async function fetchGitHubData(username) {
   return fetchJSON(`https://api.github.com/users/${username}`);
 }
-
 
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
@@ -91,7 +94,6 @@ for (let p of pages) {
   nav.append(a);
 }
 
-
 document.body.insertAdjacentHTML(
   'afterbegin',
   `
@@ -109,12 +111,15 @@ document.body.insertAdjacentHTML(
 const select = document.querySelector('#theme-switch');
 
 function setColorScheme(scheme) {
-  document.documentElement.style.setProperty('color-scheme', scheme);
+  document.documentElement.classList.remove('light', 'dark', 'auto');
+  document.documentElement.classList.add(scheme === 'light dark' ? 'auto' : scheme);
   if (select) select.value = scheme;
 }
 
 if ("colorScheme" in localStorage) {
   setColorScheme(localStorage.colorScheme);
+} else {
+  setColorScheme("light dark");
 }
 
 select?.addEventListener('input', function (event) {
@@ -122,7 +127,6 @@ select?.addEventListener('input', function (event) {
   setColorScheme(scheme);
   localStorage.colorScheme = scheme;
 });
-
 
 const form = document.querySelector("form");
 

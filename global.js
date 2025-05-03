@@ -17,7 +17,7 @@ export function renderProjects(projects, container, headingLevel = 'h2') {
     description.textContent = project.description;
 
     const year = document.createElement('p');
-    year.textContent = project.year;
+    year.textContent = `Year: ${project.year}`;
     year.classList.add('project-year');
 
     const textContainer = document.createElement('div');
@@ -37,9 +37,11 @@ export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
     console.log(response);
+
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
+
     const data = await response.json();
     return data;
   } catch (error) {
@@ -51,15 +53,13 @@ export async function fetchGitHubData(username) {
   return fetchJSON(`https://api.github.com/users/${username}`);
 }
 
+
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-// Adjust base path based on deployment
-const BASE_PATH =
-  location.hostname === "localhost" || location.hostname === "127.0.0.1"
-    ? "/"
-    : "/portfolio/";
+const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+  ? "/" : "/portfolio/";
 
 let pages = [
   { url: 'index.html', title: 'Home' },
@@ -69,7 +69,6 @@ let pages = [
   { url: "https://github.com/ishita-takkar", title: "GitHub" }
 ];
 
-// Navigation bar
 let nav = document.createElement('nav');
 document.body.prepend(nav);
 
@@ -92,7 +91,7 @@ for (let p of pages) {
   nav.append(a);
 }
 
-// Theme selector
+
 document.body.insertAdjacentHTML(
   'afterbegin',
   `
@@ -124,8 +123,9 @@ select?.addEventListener('input', function (event) {
   localStorage.colorScheme = scheme;
 });
 
-// Form submission handler (if applicable)
+
 const form = document.querySelector("form");
+
 form?.addEventListener("submit", function (event) {
   event.preventDefault();
   const data = new FormData(form);

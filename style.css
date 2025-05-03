@@ -1,3 +1,4 @@
+/*COLOR & THEME*/
 :root {
   --color-accent: oklch(70% 30% 200);
   accent-color: var(--color-accent);
@@ -22,6 +23,7 @@ body {
   margin-top: 0;
 }
 
+/*NAVIGATION*/
 nav {
   --border-color: oklch(50% 10% 200 / 40%);
   display: flex;
@@ -54,6 +56,7 @@ nav a:hover {
   cursor: pointer;
 }
 
+/*FORM*/
 form {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -99,26 +102,28 @@ button:hover {
   background-color: oklch(from var(--color-accent) 60% 40% h);
 }
 
+/*PROJECTS*/
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
-  gap: 1.5em;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
+  grid-auto-rows: auto;
   padding-block: 2em;
-  justify-content: center;
 }
 
 .projects article {
-  border: 1px solid #ddd;
-  padding: 1em;
-  border-radius: 0.5em;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: grid;
+  grid-template-rows: auto 210px 1fr;
+  gap: 1em;
   background: oklch(97% 2% 200);
+  padding: 2ch;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px oklch(0% 0% 0% / 0.05);
+  transition: transform 0.1s ease-in-out;
 }
 
 .projects article:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
 }
 
 .projects h2 {
@@ -127,7 +132,7 @@ button:hover {
 
 .projects img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   border-radius: 6px;
 }
@@ -136,6 +141,7 @@ button:hover {
   font-size: 1em;
   line-height: 1.2;
 }
+
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
@@ -146,34 +152,22 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  text-align: center;
+  text-align: left;
 }
 
-.project-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.project-year {
-  font-family: Baskerville, serif;
-  font-size: 0.85rem;
-  color: gray;
-  font-variant-numeric: oldstyle-nums;
-  margin-top: 0.3rem;
-}
-
-.color-scheme {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 80%;
-  font-family: inherit;
-}
 
 #projects-plot {
   max-width: 20em;
   margin-block: 2em;
   overflow: visible;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
 .legend {
@@ -200,34 +194,26 @@ h1 {
   display: inline-block;
 }
 
-.container {
+.project-text {
   display: flex;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 1rem;
   flex-direction: column;
 }
 
-.searchBar {
-  width: 100%;
-  max-width: 40em;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  justify-content: center;
-  padding: 0.6em 1em;
-  margin: 1em auto;
-  display: block;
-}
-
-svg:has(path:hover) path:not(:hover) {
-  opacity: 0.5;
+.project-year {
+  font-family: Baskerville, serif;
+  font-size: 0.85rem;
+  color: gray;
+  font-variant-numeric: oldstyle-nums;
+  margin-top: 0.3rem;
 }
 
 path {
   cursor: pointer;
   transition: 300ms;
+}
+
+svg:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
 }
 
 .selected {
@@ -240,4 +226,15 @@ path {
 
 .selected.legend-item {
   outline: 2px dashed var(--color);
+}
+
+/*SEARCH BAR*/
+.searchBar {
+  width: 100%;
+  max-width: 40em;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  justify-content: center;
+  display: block;
+  margin: 1em auto;
 }

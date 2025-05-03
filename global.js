@@ -4,6 +4,7 @@ console.log('IT’S ALIVE!');
 export function renderProjects(projects, container, headingLevel = 'h2') {
   container.innerHTML = '';
 
+  
   for (let project of projects) {
     const article = document.createElement('article');
 
@@ -21,12 +22,11 @@ export function renderProjects(projects, container, headingLevel = 'h2') {
     year.textContent = project.year;
     year.classList.add('project-year');
 
-    const content = document.createElement('div');
-    content.classList.add('project-text');
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('project-text');
+    textContainer.append(description, year);
 
-    content.append(description, year);
-
-    article.append(heading, img, content);
+    article.append(heading, img, textContainer);
     container.append(article);
   }
 

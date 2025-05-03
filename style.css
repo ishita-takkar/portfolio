@@ -287,13 +287,14 @@ body {
 
 
 .legend {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1rem;
   padding: 1rem;
   border: 1px solid #ccc;
   list-style: none;
+  justify-content: center; 
 }
 
 .legend-item {

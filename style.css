@@ -245,23 +245,22 @@ svg:has(path:hover) path:not(:hover) {
 
 #profile-stats dl {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); 
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5em 1em;
   text-align: center;
-  gap: 1em;
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 #profile-stats dt {
-  text-transform: uppercase;
+  grid-row: 1;
   font-weight: bold;
-  color: gray;
 }
 
 #profile-stats dd {
+  grid-row: 2;
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: bold;
 }
+
 
 
 

@@ -87,7 +87,6 @@ for (let p of pages) {
   nav.append(a);
 }
 
-// Insert theme toggle dropdown
 const themeLabel = document.createElement('label');
 themeLabel.className = 'color-scheme';
 themeLabel.innerHTML = `

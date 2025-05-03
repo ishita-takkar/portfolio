@@ -12,7 +12,7 @@ let dataForPie = [];
 
 renderProjects(projects, projectsContainer, 'h2');
 updateTitle(projects.length);
-renderPieChart(projects);
+renderPieChart(filterProjects(projects)); // filtered by default
 
 function updateTitle(count, year = '') {
   titleElement.textContent = year
@@ -31,7 +31,7 @@ function filterProjects(data) {
   });
 }
 
-function renderPieChart(projectsGiven) {
+function renderPieChart(filteredData) {
   const svg = d3.select('#projects-pie-plot');
   const legend = d3.select('.legend');
 
@@ -39,7 +39,7 @@ function renderPieChart(projectsGiven) {
   legend.selectAll('*').remove();
 
   const rolledData = d3.rollups(
-    projectsGiven,
+    filteredData,
     (v) => v.length,
     (d) => d.year
   );
@@ -64,7 +64,7 @@ function renderPieChart(projectsGiven) {
         selectedIndex = selectedIndex === i ? -1 : i;
         const filtered = filterProjects(projects);
         renderProjects(filtered, projectsContainer, 'h2');
-        renderPieChart(projects); 
+        renderPieChart(filtered); // ✅ use filtered data
         updateTitle(filtered.length, selectedIndex !== -1 ? dataForPie[selectedIndex].label : '');
       });
   });
@@ -80,7 +80,7 @@ function renderPieChart(projectsGiven) {
       selectedIndex = selectedIndex === i ? -1 : i;
       const filtered = filterProjects(projects);
       renderProjects(filtered, projectsContainer, 'h2');
-      renderPieChart(projects); 
+      renderPieChart(filtered); // ✅ use filtered data
       updateTitle(filtered.length, selectedIndex !== -1 ? dataForPie[selectedIndex].label : '');
     });
 }
@@ -89,6 +89,6 @@ searchInput.addEventListener('input', (event) => {
   query = event.target.value.toLowerCase();
   const filtered = filterProjects(projects);
   renderProjects(filtered, projectsContainer, 'h2');
+  renderPieChart(filtered); // ✅ keep pie chart filtered
   updateTitle(filtered.length, selectedIndex !== -1 ? dataForPie[selectedIndex].label : '');
-  
 });

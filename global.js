@@ -21,8 +21,12 @@ export function renderProjects(projects, container, headingLevel = 'h2') {
     year.textContent = project.year;
     year.classList.add('project-year');
 
+    const content = document.createElement('div');
+    content.classList.add('project-text');
+
     content.append(description, year);
-    article.append(heading, img, description);
+
+    article.append(heading, img, content);
     container.append(article);
   }
 

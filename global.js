@@ -1,10 +1,8 @@
-console.log('IT’S ALIVE!');
-
+console.log("IT’S ALIVE!");
 
 export function renderProjects(projects, container, headingLevel = 'h2') {
   container.innerHTML = '';
 
-  
   for (let project of projects) {
     const article = document.createElement('article');
 
@@ -37,16 +35,13 @@ export function renderProjects(projects, container, headingLevel = 'h2') {
 
 export async function fetchJSON(url) {
   try {
-    // Fetch the JSON file from the given URL
     const response = await fetch(url);
-    console.log(response); 
-
-  if (!response.ok) {
+    console.log(response);
+    if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
-    
   } catch (error) {
     console.error('Error fetching or parsing JSON data:', error);
   }
@@ -60,39 +55,44 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "/"                            
-  : "/portfolio/"; 
-                
+// Adjust base path based on deployment
+const BASE_PATH =
+  location.hostname === "localhost" || location.hostname === "127.0.0.1"
+    ? "/"
+    : "/portfolio/";
+
 let pages = [
-    { url: 'index.html', title: 'Home' },
-    { url: 'resume.html', title: 'Resume' },
-    { url: 'projects/', title: 'Projects' },
-    { url: 'contact/', title: 'Contact' },
-    { url: "https://github.com/ishita-takkar", title: "GitHub" }
+  { url: 'index.html', title: 'Home' },
+  { url: 'resume.html', title: 'Resume' },
+  { url: 'projects/', title: 'Projects' },
+  { url: 'contact/', title: 'Contact' },
+  { url: "https://github.com/ishita-takkar", title: "GitHub" }
 ];
 
+// Navigation bar
 let nav = document.createElement('nav');
 document.body.prepend(nav);
 
 for (let p of pages) {
-    let url = p.url;
-    let title = p.title;
-    url = !url.startsWith('http') ? BASE_PATH + url : url;
-    let a = document.createElement('a');
-    a.href = url;
-    a.textContent = title;
+  let url = p.url;
+  let title = p.title;
+  url = !url.startsWith('http') ? BASE_PATH + url : url;
 
-    a.classList.toggle(
-        'current',
-        a.host === location.host && a.pathname === location.pathname
-    );
+  let a = document.createElement('a');
+  a.href = url;
+  a.textContent = title;
 
-    a.toggleAttribute("target", a.host !== location.host);
-    a.toggleAttribute("rel", a.host !== location.host);
-    nav.append(a);
+  a.classList.toggle(
+    'current',
+    a.host === location.host && a.pathname === location.pathname
+  );
+
+  a.toggleAttribute("target", a.host !== location.host);
+  a.toggleAttribute("rel", a.host !== location.host);
+  nav.append(a);
 }
 
+// Theme selector
 document.body.insertAdjacentHTML(
   'afterbegin',
   `
@@ -124,8 +124,8 @@ select?.addEventListener('input', function (event) {
   localStorage.colorScheme = scheme;
 });
 
+// Form submission handler (if applicable)
 const form = document.querySelector("form");
-
 form?.addEventListener("submit", function (event) {
   event.preventDefault();
   const data = new FormData(form);
@@ -138,9 +138,3 @@ form?.addEventListener("submit", function (event) {
   const url = `${form.action}?${params.join("&")}`;
   location.href = url;
 });
-
-
-
-
-
-

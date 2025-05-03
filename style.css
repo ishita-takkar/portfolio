@@ -232,3 +232,14 @@ svg:has(path:hover) path:not(:hover) {
   display: block;
   margin: 1em auto;
 }
+
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  z-index: 1000;
+}
+

@@ -1,35 +1,31 @@
 console.log("IT’S ALIVE!");
 
 export function renderProjects(projects, container, headingLevel = 'h2') {
-  if (!container) {
-    console.warn("renderProjects called without a valid container");
-    return;
-  }
-
-  const validHeadings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-  if (!validHeadings.includes(headingLevel)) {
-    headingLevel = 'h2';
-  }
-
   container.innerHTML = '';
 
   for (let project of projects) {
     const article = document.createElement('article');
 
-    const title = project.title || 'Untitled Project';
-    const image = project.image || 'default-image.png';
-    const descriptionText = project.description || 'No description available.';
+    const heading = document.createElement(headingLevel);
+    heading.textContent = project.title;
 
-    article.innerHTML = `
-      <${headingLevel}>${title}</${headingLevel}>
-      <img src="${image}" alt="${title}">
-      <div class="project-text">
-        <p>${descriptionText}</p>
-        <p class="project-year">${project.year}</p>
-      </div>
-    `;
+    const img = document.createElement('img');
+    img.src = project.image;
+    img.alt = project.title;
 
-    container.appendChild(article);
+    const description = document.createElement('p');
+    description.textContent = project.description;
+
+    const year = document.createElement('p');
+    year.textContent = `Year: ${project.year}`;
+    year.classList.add('project-year');
+
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('project-text');
+    textContainer.append(description, year);
+
+    article.append(heading, img, textContainer);
+    container.append(article);
   }
 
   if (projects.length === 0) {
@@ -57,17 +53,14 @@ export async function fetchGitHubData(username) {
   return fetchJSON(`https://api.github.com/users/${username}`);
 }
 
-function $$(selector, context = document) {
-  return Array.from(context.querySelectorAll(selector));
-}
-
 const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "/" : "/portfolio/";
+  ? "/"
+  : "/portfolio/";
 
 let pages = [
   { url: 'index.html', title: 'Home' },
-  { url: 'resume.html', title: 'Resume' },
   { url: 'projects/', title: 'Projects' },
+  { url: 'resume.html', title: 'Resume' },
   { url: 'contact/', title: 'Contact' },
   { url: "https://github.com/ishita-takkar", title: "GitHub" }
 ];
@@ -94,38 +87,44 @@ for (let p of pages) {
   nav.append(a);
 }
 
-document.body.insertAdjacentHTML(
-  'afterbegin',
-  `
-  <label class="color-scheme">
-    Theme:
-    <select id="theme-switch">
-      <option value="light dark">Automatic</option>
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-    </select>
-  </label>
-  `
-);
+// Insert theme toggle dropdown
+const themeLabel = document.createElement('label');
+themeLabel.className = 'color-scheme';
+themeLabel.innerHTML = `
+  Theme:
+  <select id="theme-switch">
+    <option value="light dark">Automatic</option>
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+  </select>
+`;
+document.body.insertBefore(themeLabel, nav);
 
 const select = document.querySelector('#theme-switch');
 
 function setColorScheme(scheme) {
   document.documentElement.classList.remove('light', 'dark', 'auto');
-  document.documentElement.classList.add(scheme === 'light dark' ? 'auto' : scheme);
+
+  if (scheme === 'light dark') {
+    document.documentElement.classList.add('auto');
+  } else {
+    document.documentElement.classList.add(scheme);
+  }
+
+  document.documentElement.style.setProperty('color-scheme', scheme);
   if (select) select.value = scheme;
 }
 
 if ("colorScheme" in localStorage) {
   setColorScheme(localStorage.colorScheme);
 } else {
-  setColorScheme("light dark");
+  setColorScheme('light dark');
 }
 
 select?.addEventListener('input', function (event) {
   const scheme = event.target.value;
-  setColorScheme(scheme);
   localStorage.colorScheme = scheme;
+  setColorScheme(scheme);
 });
 
 const form = document.querySelector("form");

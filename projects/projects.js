@@ -12,7 +12,7 @@ let dataForPie = [];
 
 renderProjects(projects, projectsContainer, 'h2');
 updateTitle(projects.length);
-renderPieChart(filterProjects(projects));
+renderPieChart(projects);
 
 function updateTitle(count, year = '') {
   titleElement.textContent = year
@@ -31,7 +31,7 @@ function filterProjects(data) {
   });
 }
 
-function renderPieChart(filteredProjects) {
+function renderPieChart(projectsGiven) {
   const svg = d3.select('#projects-pie-plot');
   const legend = d3.select('.legend');
 
@@ -39,7 +39,7 @@ function renderPieChart(filteredProjects) {
   legend.selectAll('*').remove();
 
   const rolledData = d3.rollups(
-    filteredProjects,
+    projectsGiven,
     (v) => v.length,
     (d) => d.year
   );
@@ -64,11 +64,8 @@ function renderPieChart(filteredProjects) {
         selectedIndex = selectedIndex === i ? -1 : i;
         const filtered = filterProjects(projects);
         renderProjects(filtered, projectsContainer, 'h2');
-        renderPieChart(filtered); 
-        updateTitle(
-          filtered.length,
-          selectedIndex !== -1 ? dataForPie[selectedIndex].label : ''
-        );
+        renderPieChart(projects);
+        updateTitle(filtered.length, selectedIndex !== -1 ? dataForPie[selectedIndex].label : '');
       });
   });
 
@@ -83,11 +80,8 @@ function renderPieChart(filteredProjects) {
       selectedIndex = selectedIndex === i ? -1 : i;
       const filtered = filterProjects(projects);
       renderProjects(filtered, projectsContainer, 'h2');
-      renderPieChart(filtered); 
-      updateTitle(
-        filtered.length,
-        selectedIndex !== -1 ? dataForPie[selectedIndex].label : ''
-      );
+      renderPieChart(projects);
+      updateTitle(filtered.length, selectedIndex !== -1 ? dataForPie[selectedIndex].label : '');
     });
 }
 
@@ -95,9 +89,6 @@ searchInput.addEventListener('input', (event) => {
   query = event.target.value.toLowerCase();
   const filtered = filterProjects(projects);
   renderProjects(filtered, projectsContainer, 'h2');
-  renderPieChart(filtered); 
-  updateTitle(
-    filtered.length,
-    selectedIndex !== -1 ? dataForPie[selectedIndex].label : ''
-  );
+  renderPieChart(projects);
+  updateTitle(filtered.length, selectedIndex !== -1 ? dataForPie[selectedIndex].label : '');
 });

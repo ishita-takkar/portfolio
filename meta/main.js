@@ -86,37 +86,66 @@ function renderCommitInfo(data, commits) {
   dl.append('dt').text('Most active time of day');
   dl.append('dd').text(maxPeriod);
 }
+
 function renderScatterPlot(data, commits) {
   const width = 1000;
   const height = 600;
+  const margin = { top: 10, right: 10, bottom: 30, left: 40 };
+
+  const usableArea = {
+    top: margin.top,
+    right: width - margin.right,
+    bottom: height - margin.bottom,
+    left: margin.left,
+    width: width - margin.left - margin.right,
+    height: height - margin.top - margin.bottom,
+  };
 
   const svg = d3
-  .select('#chart')
-  .append('svg')
-  .attr('viewBox', `0 0 ${width} ${height}`)
-  .style('overflow', 'visible');
+    .select('#chart')
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .style('overflow', 'visible');
 
   const xScale = d3
-  .scaleTime()
-  .domain(d3.extent(commits, (d) => d.datetime))
-  .range([0, width])
-  .nice();
+    .scaleTime()
+    .domain(d3.extent(commits, (d) => d.datetime))
+    .range([usableArea.left, usableArea.right])
+    .nice();
 
-  const yScale = d3.scaleLinear().domain([0, 24]).range([height, 0]);
-  
+  const yScale = d3
+    .scaleLinear()
+    .domain([0, 24])
+    .range([usableArea.bottom, usableArea.top]);
+
+  // Axes
+  const xAxis = d3.axisBottom(xScale);
+  const yAxis = d3
+    .axisLeft(yScale)
+    .tickFormat((d) => String(d % 24).padStart(2, '0') + ':00');
+
+  svg
+    .append('g')
+    .attr('transform', `translate(0, ${usableArea.bottom})`)
+    .call(xAxis);
+
+  svg
+    .append('g')
+    .attr('transform', `translate(${usableArea.left}, 0)`)
+    .call(yAxis);
+
+  // Dots
   const dots = svg.append('g').attr('class', 'dots');
 
   dots
-  .selectAll('circle')
-  .data(commits)
-  .join('circle')
-  .attr('cx', (d) => xScale(d.datetime))
-  .attr('cy', (d) => yScale(d.hourFrac))
-  .attr('r', 5)
-  .attr('fill', 'steelblue');
-
-
- }
+    .selectAll('circle')
+    .data(commits)
+    .join('circle')
+    .attr('cx', (d) => xScale(d.datetime))
+    .attr('cy', (d) => yScale(d.hourFrac))
+    .attr('r', 5)
+    .attr('fill', 'steelblue');
+}
 
 // Run all
 let data = await loadData();

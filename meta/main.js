@@ -118,6 +118,21 @@ function renderScatterPlot(data, commits) {
     .domain([0, 24])
     .range([usableArea.bottom, usableArea.top]);
 
+  // Add gridlines BEFORE the axes
+  const gridlines = svg
+  .append('g')
+  .attr('class', 'gridlines')
+  .attr('transform', `translate(${usableArea.left}, 0)`);
+
+  // Create gridlines as an axis with no labels and full-width ticks
+  gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
+
+  gridlines.selectAll('line')
+  .attr('stroke', (d) => {
+    const hour = d % 24;
+    return hour < 6 || hour >= 20 ? '#457b9d' : hour < 12 ? '#f4a261' : '#e76f51';
+  });
+
   // Axes
   const xAxis = d3.axisBottom(xScale);
   const yAxis = d3

@@ -263,26 +263,23 @@ svg:has(path:hover) path:not(:hover) {
 
 .stats {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.5rem 1.5rem;
-  max-width: 40em;
-  margin: 2rem auto;
-  padding: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
-  background-color: color-mix(in oklch, Canvas, CanvasText 5%);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5em 1em;
+  text-align: center;
+  margin-top: 1rem;
+  justify-items: center;
 }
 
 .stats dt {
+  grid-row: 1;
   font-weight: bold;
-  text-align: right;
-  color: var(--color-accent);
 }
 
 .stats dd {
+  grid-row: 2;
   margin: 0;
-  font-family: system-ui, sans-serif;
 }
+
 
 
 

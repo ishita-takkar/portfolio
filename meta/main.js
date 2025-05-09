@@ -60,9 +60,20 @@ function renderCommitInfo(data, commits) {
   dl.append('dt').text('Max file length');
   dl.append('dd').text(maxFileLength);
 
-  const longestLine = d3.greatest(data, d => d.length);
-  dl.append('dt').text('Longest line');
-  dl.append('dd').text(longestLine?.text || '(no line found)');
+  const longestLine = d3.greatest(data, d => d.length)?.length;
+  dl.append('dt').text('Longest line (characters)');
+  dl.append('dd').text(longestLine);
+
+  const avgFileLength = d3.mean(
+    d3.rollups(
+      data,
+      v => d3.max(v, d => d.line),
+      d => d.file
+    ),
+    d => d[1]
+  );
+  dl.append('dt').text('Average file length');
+  dl.append('dd').text(avgFileLength.toFixed(1));
 
   const maxPeriod = d3.greatest(
     d3.rollups(
@@ -75,7 +86,41 @@ function renderCommitInfo(data, commits) {
   dl.append('dt').text('Most active time of day');
   dl.append('dd').text(maxPeriod);
 }
+function renderScatterPlot(data, commits) {
+  const width = 1000;
+  const height = 600;
 
+  const svg = d3
+  .select('#chart')
+  .append('svg')
+  .attr('viewBox', `0 0 ${width} ${height}`)
+  .style('overflow', 'visible');
+
+  const xScale = d3
+  .scaleTime()
+  .domain(d3.extent(commits, (d) => d.datetime))
+  .range([0, width])
+  .nice();
+
+  const yScale = d3.scaleLinear().domain([0, 24]).range([height, 0]);
+  
+  const dots = svg.append('g').attr('class', 'dots');
+
+  dots
+  .selectAll('circle')
+  .data(commits)
+  .join('circle')
+  .attr('cx', (d) => xScale(d.datetime))
+  .attr('cy', (d) => yScale(d.hourFrac))
+  .attr('r', 5)
+  .attr('fill', 'steelblue');
+
+
+ }
+
+// Run all
 let data = await loadData();
 let commits = processCommits(data);
-renderCommitInfo(data, commits);
+
+renderCommitInfo(data, commits); 
+renderScatterPlot(data, commits);

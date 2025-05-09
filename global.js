@@ -62,6 +62,7 @@ let pages = [
   { url: 'projects/', title: 'Projects' },
   { url: 'resume.html', title: 'Resume' },
   { url: 'contact/', title: 'Contact' },
+  { url: 'meta/', title: 'Meta' },
   { url: "https://github.com/ishita-takkar", title: "GitHub" }
 ];
 

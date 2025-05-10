@@ -44,14 +44,12 @@ function processCommits(data) {
 function renderCommitInfo(data, commits) {
   const dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
-  // Basic stats
   dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
   dl.append('dd').text(data.length);
 
   dl.append('dt').text('Total commits');
   dl.append('dd').text(commits.length);
 
-  // Custom stats
   const numFiles = d3.groups(data, d => d.file).length;
   dl.append('dt').text('Number of files');
   dl.append('dd').text(numFiles);
@@ -92,6 +90,8 @@ function renderScatterPlot(data, commits) {
   const height = 600;
   const margin = { top: 10, right: 10, bottom: 30, left: 40 };
 
+  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+
   const usableArea = {
     top: margin.top,
     right: width - margin.right,
@@ -118,13 +118,11 @@ function renderScatterPlot(data, commits) {
     .domain([0, 24])
     .range([usableArea.bottom, usableArea.top]);
 
-  // Add gridlines BEFORE the axes
   const gridlines = svg
   .append('g')
   .attr('class', 'gridlines')
   .attr('transform', `translate(${usableArea.left}, 0)`);
 
-  // Create gridlines as an axis with no labels and full-width ticks
   gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 
   gridlines.selectAll('line')
@@ -149,18 +147,70 @@ function renderScatterPlot(data, commits) {
     .attr('transform', `translate(${usableArea.left}, 0)`)
     .call(yAxis);
 
+  const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+
+  const rScale = d3
+  .scaleSqrt() 
+  .domain([minLines, maxLines])
+  .range([2, 30]);
+
   // Dots
   const dots = svg.append('g').attr('class', 'dots');
 
   dots
-    .selectAll('circle')
-    .data(commits)
-    .join('circle')
-    .attr('cx', (d) => xScale(d.datetime))
-    .attr('cy', (d) => yScale(d.hourFrac))
-    .attr('r', 5)
-    .attr('fill', 'steelblue');
+  .selectAll('circle')
+  .data(sortedCommits)
+  .join('circle')
+  .attr('cx', (d) => xScale(d.datetime))
+  .attr('cy', (d) => yScale(d.hourFrac))
+  .attr('r', (d) => rScale(d.totalLines))
+  .style('fill-opacity', 0.7)
+  .on('mouseenter', (event, commit) => {
+    d3.select(event.currentTarget).style('fill-opacity', 1);
+    renderTooltipContent(commit);
+    updateTooltipVisibility(true);
+    updateTooltipPosition(event);
+  })
+  .on('mouseleave', (event) => {
+    d3.select(event.currentTarget).style('fill-opacity', 0.7);
+    updateTooltipVisibility(false);
+  });
+
 }
+
+function renderTooltipContent(commit) {
+  const link = document.getElementById('commit-link');
+  const date = document.getElementById('commit-date');
+  const time = document.getElementById('commit-time');
+  const author = document.getElementById('commit-author');
+  const lines = document.getElementById('commit-lines');
+
+  if (!commit) return;
+
+  link.href = commit.url;
+  link.textContent = commit.id;
+  date.textContent = commit.datetime?.toLocaleDateString('en', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+  time.textContent = commit.datetime?.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' });
+  author.textContent = commit.author;
+  lines.textContent = commit.totalLines;
+}
+
+function updateTooltipVisibility(isVisible) {
+  const tooltip = document.getElementById('commit-tooltip');
+  tooltip.hidden = !isVisible;
+}
+
+function updateTooltipPosition(event) {
+  const tooltip = document.getElementById('commit-tooltip');
+  tooltip.style.left = `${event.clientX}px`;
+  tooltip.style.top = `${event.clientY}px`;
+}
+
 
 // Run all
 let data = await loadData();

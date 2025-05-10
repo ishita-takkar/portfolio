@@ -176,6 +176,14 @@ function renderScatterPlot(data, commits) {
     updateTooltipVisibility(false);
   });
 
+  createBrushSelector(svg);
+
+}
+
+function createBrushSelector(svg) {
+  svg.call(d3.brush());
+
+  svg.selectAll('.dots, .overlay ~ *').raise();
 }
 
 function renderTooltipContent(commit) {
@@ -210,7 +218,6 @@ function updateTooltipPosition(event) {
   tooltip.style.left = `${event.clientX}px`;
   tooltip.style.top = `${event.clientY}px`;
 }
-
 
 // Run all
 let data = await loadData();

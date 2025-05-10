@@ -159,11 +159,13 @@ function brushed(event) {
   const selection = event.selection;
 
   d3.selectAll('circle')
-    .classed('selected', d => isCommitSelected(selection, d));
+    .classed('selected', d => isCommitSelected(selection, d))
+    .attr('fill', d => isCommitSelected(selection, d) ? '#ff6b6b' : 'steelblue');
 
   renderSelectionCount(selection);
   renderLanguageBreakdown(selection);
 }
+
 
 function isCommitSelected(selection, commit) {
   if (!selection) return false;

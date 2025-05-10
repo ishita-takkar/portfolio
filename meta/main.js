@@ -191,7 +191,7 @@ function renderLanguageBreakdown(selection) {
   container.innerHTML = '';
   for (const [lang, count] of breakdown) {
     const pct = d3.format('.1~%')(count / lines.length);
-    container.innerHTML += `<dt>${lang}</dt><dd>${count} lines (${pct})</dd>`;
+    container.innerHTML += `<dt>${lang.toUpperCase()}</dt><dd>${count} lines (${pct})</dd>`;
   }
 }
 

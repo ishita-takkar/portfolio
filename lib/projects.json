@@ -13,6 +13,7 @@
     },
     {
      "title": "Bikewatching",
+     "year": "2025",
      "description": "An interactive D3 + Mapbox visualization showing Boston bike traffic patterns, station flows, and volume by time of day.",
     "image": "/portfolio/images.bikemap.png",
     "url": "https://ishita-takkar.github.io/boston_cycle_sync/"

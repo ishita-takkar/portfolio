@@ -7,7 +7,15 @@ export function renderProjects(projects, container, headingLevel = 'h2') {
     const article = document.createElement('article');
 
     const heading = document.createElement(headingLevel);
+    if (project.url) {
+    const link = document.createElement('a');
+    link.href = project.url;
+    link.target = '_blank';
+    link.textContent = project.title;
+    heading.appendChild(link);
+  } else {
     heading.textContent = project.title;
+  }
 
     const img = document.createElement('img');
     img.src = project.image;

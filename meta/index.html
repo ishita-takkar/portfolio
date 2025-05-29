@@ -11,6 +11,12 @@
   <h2>Summary</h2>
   <div id="stats"></div>
 
+  <div style="display: flex; align-items: baseline;">
+    <label for="commit-progress">Show commits until:</label>
+    <input type="range" id="commit-progress" min="0" max="100" value="100">
+    <time id="commit-time" style="margin-left: auto;"></time>
+  </div>
+
   <h2>Commits by Time of Day</h2>
   <p id="selection-count">No commits selected</p>
   <div id="chart"></div>

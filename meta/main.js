@@ -2,6 +2,7 @@ import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
 let xScale, yScale; 
 let commits = [];
+let filteredCommits = commits;
 
 async function loadData() {
   const data = await d3.csv('loc.csv', (row) => ({
@@ -118,14 +119,19 @@ function renderScatterPlot(data) {
       const h = d % 24;
       return h < 6 || h >= 20 ? '#457b9d' : h < 12 ? '#f4a261' : '#e76f51';
     });
+const xAxis = d3.axisBottom(xScale); 
 
-  svg.append('g')
+  svg
+    .append('g')
     .attr('transform', `translate(0, ${usableArea.bottom})`)
-    .call(d3.axisBottom(xScale));
+    .attr('class', 'x-axis') // new line to mark the g tag
+    .call(xAxis);
 
-  svg.append('g')
+  svg
+    .append('g')
     .attr('transform', `translate(${usableArea.left}, 0)`)
-    .call(d3.axisLeft(yScale).tickFormat(d => String(d % 24).padStart(2, '0') + ':00'));
+    .attr('class', 'y-axis') // just for consistency
+    .call(yAxis);
 
   const rScale = d3.scaleSqrt()
     .domain(d3.extent(commits, d => d.totalLines))
@@ -227,8 +233,8 @@ let timeScale = d3
     d3.max(commits, (d) => d.datetime),
   ])
   .range([0, 100]);
+
 let commitMaxTime = timeScale.invert(commitProgress);
-let filteredCommits = commits;
 function onTimeSliderChange() {
   commitProgress = +document.getElementById('commit-progress').value;
   commitMaxTime = timeScale.invert(commitProgress);

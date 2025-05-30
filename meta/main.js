@@ -137,7 +137,7 @@ const xAxis = d3.axisBottom(xScale);
     .domain(d3.extent(commits, d => d.totalLines))
     .range([2, 30]);
 
-  const dots = svg.append('g').attr('class', 'dots');
+  const dots = svg.select('g.dots');
 
   dots.selectAll('circle')
     .data(d3.sort(commits, d => -d.totalLines))
@@ -261,7 +261,8 @@ function updateScatterPlot(data, commits) {
 
   const svg = d3.select('#chart').select('svg');
 
-  xScale = xScale.domain(d3.extent(commits, (d) => d.datetime));
+  xScale.domain(d3.extent(commits, (d) => d.datetime));
+
 
   const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
   const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 30]);

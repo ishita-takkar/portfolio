@@ -333,7 +333,18 @@ d3.select('#scatter-story')
   );
  
 function onStepEnter(response) {
-  console.log(response);
+  const commit = response.element.__data__;
+  commitMaxTime = commit.datetime;
+
+  document.getElementById('commit-time').textContent = commitMaxTime.toLocaleString(undefined, {
+    dateStyle: 'long',
+    timeStyle: 'short',
+  });
+
+  filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
+  renderCommitInfo(data, filteredCommits);
+  updateScatterPlot(data, filteredCommits);
+  updateFileDisplay(filteredCommits);
 }
 
 const scroller = scrollama();

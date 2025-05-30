@@ -435,3 +435,6 @@ circle {
   bottom: auto;
   height: 50vh;
 }
+.step {
+  padding-bottom: 80vh;
+}

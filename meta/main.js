@@ -86,7 +86,7 @@ function renderTooltipContent(commit) {
   document.getElementById('commit-link').textContent = commit.id;
   document.getElementById('commit-link').href = commit.url;
   document.getElementById('commit-date').textContent = commit.datetime.toLocaleDateString('en', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  document.getElementById('commit-time').textContent = commit.datetime.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('commit-tooltip-time').textContent = commit.datetime.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' });
   document.getElementById('commit-author').textContent = commit.author;
   document.getElementById('commit-lines').textContent = commit.totalLines;
 }
@@ -162,7 +162,6 @@ function brushed(event) {
   renderSelectionCount(selection);
   renderLanguageBreakdown(selection);
 }
-
 
 function isCommitSelected(selection, commit) {
   if (!selection) return false;

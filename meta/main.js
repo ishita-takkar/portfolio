@@ -267,8 +267,8 @@ function updateScatterPlot(data, commits) {
       updateTooltipVisibility(false);
     });
 }
+renderCommitInfo(data, commits);
 
 document.getElementById('commit-progress').addEventListener('input', onTimeSliderChange);
 onTimeSliderChange();
-renderCommitInfo(data, commits);
-renderScatterPlot(data, commits);
+

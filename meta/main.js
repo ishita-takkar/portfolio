@@ -224,7 +224,10 @@ function renderSelectionCount(selection) {
 }
 
 function renderLanguageBreakdown(selection) {
-  const selected = selection ? commits.filter(d => isCommitSelected(selection, d)) : [];
+  const selected = selection
+    ? commits.filter(d => isCommitSelected(selection, d))
+    : filteredCommits;
+
   const lines = selected.flatMap(d => d.lines);
   const container = document.getElementById('language-breakdown');
 
@@ -312,6 +315,7 @@ function onStepEnter(response) {
   renderCommitInfo(data, filteredCommits);
   updateScatterPlot(data, filteredCommits);
   updateFileDisplay(filteredCommits);
+  renderLanguageBreakdown(null); 
 }
 
 const scroller = scrollama();

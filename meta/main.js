@@ -82,8 +82,26 @@ function renderCommitInfo(data, commits) {
   dl.append('dt').text('Most active time of day');
   dl.append('dd').text(maxPeriod);
 }
+function renderTooltipContent(commit) {
+  document.getElementById('commit-link').textContent = commit.id;
+  document.getElementById('commit-link').href = commit.url;
+  document.getElementById('commit-date').textContent = commit.datetime.toLocaleDateString('en', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  document.getElementById('commit-time').textContent = commit.datetime.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('commit-author').textContent = commit.author;
+  document.getElementById('commit-lines').textContent = commit.totalLines;
+}
 
-function renderScatterPlot(data) {
+function updateTooltipVisibility(show) {
+  document.getElementById('commit-tooltip').hidden = !show;
+}
+
+function updateTooltipPosition(event) {
+  const t = document.getElementById('commit-tooltip');
+  t.style.left = `${event.clientX}px`;
+  t.style.top = `${event.clientY}px`;
+}
+
+function renderScatterPlot(data, commits) {
   const width = 1000;
   const height = 600;
   const margin = { top: 10, right: 10, bottom: 30, left: 40 };
@@ -110,16 +128,9 @@ function renderScatterPlot(data) {
     .domain([0, 24])
     .range([usableArea.bottom, usableArea.top]);
 
-  svg.append('g')
-    .attr('class', 'gridlines')
+  svg.append('g').attr('class', 'gridlines')
     .attr('transform', `translate(${usableArea.left}, 0)`)
-    .call(d3.axisLeft(yScale).tickSize(-usableArea.width).tickFormat(''))
-    .selectAll('line')
-    .attr('stroke', d => {
-      const h = d % 24;
-      return h < 6 || h >= 20 ? '#457b9d' : h < 12 ? '#f4a261' : '#e76f51';
-    });
-const xAxis = d3.axisBottom(xScale); 
+    .call(d3.axisLeft(yScale).tickSize(-usableArea.width).tickFormat(''));
 
   svg
     .append('g')
@@ -133,29 +144,9 @@ const xAxis = d3.axisBottom(xScale);
     .attr('class', 'y-axis') // just for consistency
     .call(yAxis);
 
-  const rScale = d3.scaleSqrt()
-    .domain(d3.extent(commits, d => d.totalLines))
-    .range([2, 30]);
+  svg.append('g').attr('class', 'dots');
 
-  const dots = svg.select('g.dots');
-
-  dots.selectAll('circle')
-    .data(d3.sort(commits, d => -d.totalLines))
-    .join('circle')
-    .attr('cx', d => xScale(d.datetime))
-    .attr('cy', d => yScale(d.hourFrac))
-    .attr('r', d => rScale(d.totalLines))
-    .style('fill-opacity', 0.7)
-    .on('mouseenter', (event, d) => {
-      d3.select(event.currentTarget).style('fill-opacity', 1);
-      renderTooltipContent(d);
-      updateTooltipVisibility(true);
-      updateTooltipPosition(event);
-    })
-    .on('mouseleave', (event) => {
-      d3.select(event.currentTarget).style('fill-opacity', 0.7);
-      updateTooltipVisibility(false);
-    });
+  updateScatterPlot(data, commits);
 
   svg.call(d3.brush().on('start brush end', brushed));
   svg.selectAll('.dots, .overlay ~ *').raise();
@@ -201,25 +192,6 @@ function renderLanguageBreakdown(selection) {
     const pct = d3.format('.1~%')(count / lines.length);
     container.innerHTML += `<dt>${lang.toUpperCase()}</dt><dd>${count} lines (${pct})</dd>`;
   }
-}
-
-function renderTooltipContent(commit) {
-  document.getElementById('commit-link').textContent = commit.id;
-  document.getElementById('commit-link').href = commit.url;
-  document.getElementById('commit-date').textContent = commit.datetime.toLocaleDateString('en', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  document.getElementById('commit-time').textContent = commit.datetime.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' });
-  document.getElementById('commit-author').textContent = commit.author;
-  document.getElementById('commit-lines').textContent = commit.totalLines;
-}
-
-function updateTooltipVisibility(show) {
-  document.getElementById('commit-tooltip').hidden = !show;
-}
-
-function updateTooltipPosition(event) {
-  const t = document.getElementById('commit-tooltip');
-  t.style.left = `${event.clientX}px`;
-  t.style.top = `${event.clientY}px`;
 }
 
 const data = await loadData();

@@ -312,6 +312,7 @@ d3.select('#scatter-story')
   .data(commits)
   .join('div')
   .attr('class', 'step')
+  .attr('style', 'padding-bottom: 80vh;')
   .html(
     (d, i) => `
 		On ${d.datetime.toLocaleString('en', {
@@ -354,7 +355,3 @@ scroller
     step: '#scrolly-1 .step',
   })
   .onStepEnter(onStepEnter);
-
-  function onStepEnter(response) {
-  console.log(response.element.__data__.datetime);
-}

@@ -17,14 +17,16 @@
     <time id="commit-time" style="margin-left: auto;"></time>
   </div>
 
-  <dl id="files"></dl>
-
   <h2>Commits by Time of Day</h2>
-  <p id="selection-count">No commits selected</p>
-  <div id="chart"></div>
-
-  <h2>Language Breakdown</h2>
-  <dl id="language-breakdown" class="stats"></dl>
+  
+  <div id="scrolly-1">
+  <div id="scatter-story"></div>
+  <div id="scatter-plot">
+    <div id="chart"></div>
+    <p id="selection-count">No commits selected</p>
+    <dl id="language-breakdown" class="stats"></dl>
+  </div>
+</div>
 
   <dl id="commit-tooltip" class="info tooltip" hidden>
     <dt>Commit</dt>
@@ -45,5 +47,6 @@
 
   <script src="../global.js" type="module"></script>
   <script type="module" src="main.js"></script>
+<dl id="files"></dl>
 </body>
 </html>

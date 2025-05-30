@@ -241,17 +241,6 @@ function renderLanguageBreakdown(selection) {
 
 const data = await loadData();
 commits = processCommits(data);
-let commitProgress = 100;
-
-let timeScale = d3
-  .scaleTime()
-  .domain([
-    d3.min(commits, d => d.datetime),
-    d3.max(commits, d => d.datetime),
-  ])
-  .range([0, 100]);
-
-let commitMaxTime = timeScale.invert(commitProgress);
 
 function updateFileDisplay(filteredCommits) {
   let lines = filteredCommits.flatMap(d => d.lines);
@@ -285,27 +274,9 @@ function updateFileDisplay(filteredCommits) {
   .attr('style', d => `--color: ${colors(d.type)}`);
 }
 
-function onTimeSliderChange() {
-  commitProgress = +document.getElementById('commit-progress').value;
-  commitMaxTime = timeScale.invert(commitProgress);
-
-  document.getElementById('commit-time').textContent = commitMaxTime.toLocaleString(undefined, {
-    dateStyle: 'long',
-    timeStyle: 'short',
-  });
-
-  filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
-  renderCommitInfo(data, filteredCommits);
-  updateScatterPlot(data, filteredCommits);
-  updateFileDisplay(filteredCommits);
-}
-
-
 
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
-document.getElementById('commit-progress').addEventListener('input', onTimeSliderChange);
-onTimeSliderChange();
 
 d3.select('#scatter-story')
   .selectAll('.step')

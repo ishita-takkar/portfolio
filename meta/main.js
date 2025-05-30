@@ -47,6 +47,8 @@ function processCommits(data) {
 }
 
 function renderCommitInfo(data, commits) {
+  d3.select('#stats').selectAll('*').remove(); 
+  
   const dl = d3.select('#stats').append('dl').attr('class', 'stats');
   dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
   dl.append('dd').text(data.length);
@@ -233,6 +235,7 @@ function renderLanguageBreakdown(selection) {
   }
 }
 
+
 const data = await loadData();
 commits = processCommits(data);
 let commitProgress = 100;
@@ -247,6 +250,38 @@ let timeScale = d3
 
 let commitMaxTime = timeScale.invert(commitProgress);
 
+function updateFileDisplay(filteredCommits) {
+  let lines = filteredCommits.flatMap(d => d.lines);
+  let colors = d3.scaleOrdinal(d3.schemeTableau10);
+  let files = d3
+  .groups(lines, (d) => d.file)
+  .map(([name, lines]) => {
+    return { name, lines };
+  })
+  .sort((a, b) => b.lines.length - a.lines.length);
+
+  const filesContainer = d3
+    .select('#files')
+    .selectAll('div')
+    .data(files, d => d.name)
+    .join(
+      enter => enter.append('div').call(div => {
+        div.append('dt').append('code');
+        div.append('dd');
+      })
+    );
+
+  filesContainer.select('dt > code')
+  .html(d => `${d.name}<br><small>${d.lines.length} lines</small>`);
+  filesContainer
+  .select('dd')
+  .selectAll('div')
+  .data(d => d.lines)
+  .join('div')
+  .attr('class', 'loc')
+  .attr('style', d => `--color: ${colors(d.type)}`);
+}
+
 function onTimeSliderChange() {
   commitProgress = +document.getElementById('commit-progress').value;
   commitMaxTime = timeScale.invert(commitProgress);
@@ -257,8 +292,12 @@ function onTimeSliderChange() {
   });
 
   filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
+  renderCommitInfo(data, filteredCommits);
   updateScatterPlot(data, filteredCommits);
+  updateFileDisplay(filteredCommits);
 }
+
+
 
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);

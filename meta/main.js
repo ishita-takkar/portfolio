@@ -205,18 +205,6 @@ let timeScale = d3
   ])
   .range([0, 100]);
 
-let commitMaxTime = timeScale.invert(commitProgress);
-function onTimeSliderChange() {
-  commitProgress = +document.getElementById('commit-progress').value;
-  commitMaxTime = timeScale.invert(commitProgress);
-  document.getElementById('commit-time').textContent = commitMaxTime.toLocaleString(undefined, {
-    dateStyle: "long",
-    timeStyle: "short",
-  });
-  filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
-  updateScatterPlot(data, filteredCommits);
-}
-
 function updateScatterPlot(data, commits) {
   const width = 1000;
   const height = 600;
@@ -267,8 +255,20 @@ function updateScatterPlot(data, commits) {
       updateTooltipVisibility(false);
     });
 }
-renderCommitInfo(data, commits);
+let commitMaxTime = timeScale.invert(commitProgress);
+function onTimeSliderChange() {
+  commitProgress = +document.getElementById('commit-progress').value;
+  commitMaxTime = timeScale.invert(commitProgress);
+  document.getElementById('commit-time').textContent = commitMaxTime.toLocaleString(undefined, {
+    dateStyle: "long",
+    timeStyle: "short",
+  });
+  filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
+  updateScatterPlot(data, filteredCommits);
+}
 
+renderCommitInfo(data, commits);
+renderScatterPlot(data, commits);
 document.getElementById('commit-progress').addEventListener('input', onTimeSliderChange);
-onTimeSliderChange();
+onTimeSliderChange(); 
 

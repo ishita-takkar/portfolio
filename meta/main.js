@@ -312,7 +312,6 @@ d3.select('#scatter-story')
   .data(commits)
   .join('div')
   .attr('class', 'step')
-  .attr('style', 'padding-bottom: 80vh;')
   .html(
     (d, i) => `
 		On ${d.datetime.toLocaleString('en', {

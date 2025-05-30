@@ -17,6 +17,17 @@
     <time id="commit-time" style="margin-left: auto;"></time>
   </div>
 
+  <dl id="files">
+    <!-- we want the following structure for each file:
+  <div>
+    <dt>
+      <code>{file.name}</code>
+    </dt>
+    <dd>{file.lines.length} lines</dd>
+  </div>
+  -->
+ </dl>
+
   <h2>Commits by Time of Day</h2>
   <p id="selection-count">No commits selected</p>
   <div id="chart"></div>
@@ -32,7 +43,7 @@
     <dd id="commit-date"></dd>
 
     <dt>Time</dt>
-    <dd id="commit-time"></dd>
+    <dd id="commit-tooltip-time"></dd>
 
     <dt>Author</dt>
     <dd id="commit-author"></dd>

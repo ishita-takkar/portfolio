@@ -1,13 +1,26 @@
 [
     {
+      "title": "Rodent Riddle: Data Visualization Game",
+      "year": "2025",
+      "image": "/portfolio/images/rodent.png",
+      "description": "Built an interactive web app with D3.js to visualize mouse temperature and activity across 20,160 time points. Created a data-driven game to predict mouse type and estrus phase with dynamic visual feedback. Designed responsive UI with tooltips, storytelling text, and modular layout components for two visualization modes.",
+      "url": "https://dsc106soir.github.io/rodent_riddle/"
+    },
+    {
       "title": "Recipe Ratings Analysis",
-      "year": "2024",
+      "year": "2025",
       "image": "/portfolio/images/recipe.jpg",
-      "description": "Analyzed how sugar content affects recipe ratings using hypothesis testing, linear regression, and data visualization techniques."
+      "description": "Analyzed over 200,000 recipes to model rating patterns and ingredient-level impact using Random Forest. Reduced RMSE from 4.79 to 4.45; conducted fairness testing across sugar levels. Visualized trends in recipe popularity and nutritional characteristics using interactive plots."
+    },
+    {
+      "title": "Language Modeling from Project Gutenberg",
+      "year": "2025",
+      "image": "/portfolio/images/nlp.png",
+      "description": "Processed and tokenized over 500,000 words from classic literature using regex and custom start/end markers. Implemented Uniform, Unigram, and N-gram (up to 4-gram) language models with conditional probability estimation. Developed a text generation pipeline using recursive sampling to produce syntactically coherent sequences."
     },
     {
       "title": "Loan Default Prediction",
-      "year": "2023",
+      "year": "2025",
       "image": "/portfolio/images/loan.png",
       "description": "Built predictive models using logistic regression and decision trees to assess loan default risk based on LendingClub data."
     },
@@ -17,60 +30,6 @@
      "description": "An interactive D3 + Mapbox visualization showing Boston bike traffic patterns, station flows, and volume by time of day.",
     "image": "/portfolio/images/bikemap.png",
     "url": "https://ishita-takkar.github.io/boston_cycle_sync/"
-    },
-    {
-      "title": "Consulting Project",
-      "year": "2020",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Collaborated with a data science client to design and deliver weekly reports, educational content, and analytical recommendations."
-    },
-    {
-      "title": "Climate Change Visualization",
-      "year": "2022",
-      "image": "/portfolio/images/climate.JPG",
-      "description": "Visualized global greenhouse gas emissions data using D3.js and identified trends across countries from 1990 to 2020."
-    },
-    {
-      "title": "Credit Fraud Prediction",
-      "year": "2023",
-      "image": "/portfolio/images/credit.JPG",
-      "description": "Trained ensemble models to predict creditworthiness and compared model performance using precision-recall metrics."
-    },
-    {
-      "title": "Chatbot for Healthcare AI",
-      "year": "2020",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Created a healthcare chatbot prototype capable of answering symptom-based queries using basic NLP techniques."
-    },
-    {
-      "title": "Dancing Teacher AI App",
-      "year": "2021",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Designed an AI-powered app that uses pose detection to provide real-time feedback on dance movement accuracy."
-    },
-    {
-      "title": "Tweet Sentiment Analysis",
-      "year": "2019",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Used NLP and supervised learning to classify tweets by sentiment and explored text feature extraction methods."
-    },
-    {
-      "title": "Webscraping For Course Analysis",
-      "year": "2018",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Scraped CAPE data to analyze student satisfaction trends across UCSD courses, instructors, and departments."
-    },
-    {
-      "title": "Movie Recommendation System",
-      "year": "2019",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Developed a basic recommendation engine using collaborative filtering and cosine similarity on movie ratings."
-    },
-    {
-      "title": "Exploring Abortion Rates Across U.S. States",
-      "year": "2015",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Analyzed publicly available health datasets to investigate abortion access and policy impact across states."
     }
   ]
   
